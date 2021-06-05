@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>База данных библиотеки </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header class="mb-auto">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="#">Library</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Поиск книг <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog">Книги</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/blog/add">Добавить книгу</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</header>
+
+<!--<div class="container mt-5">
+    <h1>Внесенные книги:</h1>
+    <div th:each="el : ${post}" class="alert alert-info mt-2">
+        <h3 th:text="${el.bookTitle}"></h3>
+        <tr th:text="${el.author}"></tr>
+        <tr th:text="${el.genre}"></tr>
+        <tr th:text="${el.publisher}"></tr>
+        <tr th:text="${el.storage}"></tr>
+        <tr th:text="${el.isbn}"></tr>
+        <tr th:text="${el.yearOfBook}"></tr>
+        <a th:href="'/blog/' + ${el.id}" class=" btn btn-warning">Детальнее</a>
+    </div>
+</div>-->
+<br>
+<br>
+<br>
+<b>Удаление по ID</b>
+<form method="post" action="deleteById">
+    <input type="text" name="deleteById">
+    <button type="submit">Удалить</button>
+</form>
+
+
+
+
+<div>
+    <table border="1" width="100%" cellpadding="5">
+        <tr>
+            <th>ID</th>
+            <th>Название книги</th>
+            <th>Автор</th>
+            <th>Жанр</th>
+            <th>Издательство</th>
+            <th>Хранилище</th>
+            <th>ИСБН</th>
+            <th>Год издательства</th>
+        </tr>
+
+        {{#posts}}
+            <tr>
+                <th>  <b>{{id}}</b></th>
+                <th><span>{{bookTitle}}</span></th>
+                <th><span>{{author}}</span></th>
+                <th><span>{{genre}}</span></th>
+                <th><span>{{publisher}}</span></th>
+                <th><i>{{storage}}</i></th>
+                <th><i>{{isbn}}</i></th>
+                <th><i>{{yearOfBook}}</i></th>
+            </tr>
+        {{/posts}}
+    </table>
+</div>
+
+<footer class="mt-auto text-white-50">
+    <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
+</footer>
+</body>
+</html>
