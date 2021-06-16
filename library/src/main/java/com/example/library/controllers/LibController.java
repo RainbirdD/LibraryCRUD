@@ -7,65 +7,40 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
-public class BlogController {
+public class LibController {
 
     @Autowired
     private PostRepository postRepository;
-    @GetMapping("/blog")
-    public String blogMain(Model model){
+
+    public LibController(PostRepository postRepository) {
+        this.postRepository = postRepository;
+    }
+
+    @GetMapping("/lib")
+    public String libMain(Model model){
         Iterable<Post> posts = postRepository.findAll();
         model.addAttribute("posts",posts);
 
-        return "blog-main";
+        return "lib-main";
 
     }
 
-    @GetMapping("/blog/add")
-    public String blogAdd(Model model){
-        return "blog-add";
+    @GetMapping("/lib/add")
+    public String libAdd(Model model){
+        return "lib-add";
 
     }
 
-    @GetMapping("/blog/{id}")
-    public String blogDetails(@PathVariable(value = "id") long id, Model model){
-        if(!postRepository.existsById(id)){
-            return "redirect:/blog";
-        }
-        Optional<Post> post = postRepository.findById(id);
 
-        ArrayList<Post> res=new ArrayList<>();
-        post.ifPresent((res::add));
-        model.addAttribute("post",res);
-        return "blod-details";
-    }
-
-    @GetMapping("/blog/{id}/edit")
-    public String blogEdit(@PathVariable(value = "id") long id, Model model){
-        if(!postRepository.existsById(id)){
-            return "redirect:/blog";
-        }
-        Optional<Post> post = postRepository.findById(id);
-
-        ArrayList<Post> res=new ArrayList<>();
-        post.ifPresent((res::add));
-        model.addAttribute("post",res);
-        return "blod-edit";
-    }
-
-
-
-
-    @GetMapping
-    public String home(Map<String, Object> model) {
-/*        Iterable<Post> posts =  postRepository.findAll();
-        model.put("posts", posts);*/
-        return "home";
+    @GetMapping("/lib/search")
+    public String search(Map<String, Object> model) {
+       Iterable<Post> posts =  postRepository.findAll();
+        model.put("posts", posts);
+        return "search";
 
     }
 
@@ -73,20 +48,20 @@ public class BlogController {
     public String filter(@RequestParam String filter, Map<String, Object> model){
         List<Post> posts = postRepository.findBybookTitle(filter);
         model.put("posts",posts);
-        return "home";
+        return "search";
     }
 
     @PostMapping("filter2")
     public String filter2(@RequestParam int filter2, Map<String, Object> model){
         List<Post> posts = postRepository.findByisbn(filter2);
         model.put("posts",posts);
-        return "home";
+        return "search";
     }
     @PostMapping("filter3")
     public String filter3(@RequestParam String filter3, Map<String, Object> model){
         List<Post> posts = postRepository.findByauthor(filter3);
         model.put("posts",posts);
-        return "home";
+        return "search";
     }
 
 
@@ -94,13 +69,13 @@ public class BlogController {
     @PostMapping("deleteById")
     public String remove(@RequestParam long deleteById) {
         postRepository.deleteById(deleteById);
-        return "blog";
+        return "lib-main";
     }
 
 
 
-    @PostMapping("/blog/add")
-    public String blogPostAdd(
+    @PostMapping("/lib/add")
+    public String libPostAdd(
             @RequestParam String bookTitle,
             @RequestParam String author,
             @RequestParam String genre,
@@ -113,7 +88,7 @@ public class BlogController {
         postRepository.save(post);
         Iterable<Post> posts =  postRepository.findAll();
         model.put("posts", posts);
-        return "home";
+        return "lib-main";
     }
 
 
