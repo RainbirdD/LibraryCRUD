@@ -116,28 +116,5 @@ public class BlogController {
         return "home";
     }
 
-/*
-    @PostMapping("/blog/{id}/edit")
-    public String blogPostUpdate(
-            @PathVariable(value = "id") long id,
-            @RequestParam String bookTitle,
-            @RequestParam String author,
-            @RequestParam String genre,
-            @RequestParam String publisher,
-            @RequestParam String storage,
-            @RequestParam int isbn,
-            @RequestParam int yearOfBook, Map<String, Object> model){
-        Post post = postRepository.findById(id).orElseThrow();
-        post.setBookTitle(bookTitle);
-        post.setAuthor(author);
-        post.setGenre(genre);
-        post.setPublisher(publisher);
-        post.setStorage(storage);
-        post.getIsbn(isbn);
-        post.setYearOfBook(yearOfBook);
-        postRepository.save(post);
-        return "blog-edit";
-    }*/
-
 
 }
