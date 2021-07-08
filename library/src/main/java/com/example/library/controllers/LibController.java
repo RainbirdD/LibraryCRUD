@@ -44,20 +44,20 @@ public class LibController {
 
     }
 
-    @PostMapping("filter")
+    @PostMapping("/lib/filter")
     public String filter(@RequestParam String filter, Map<String, Object> model){
         List<Post> posts = postRepository.findBybookTitle(filter);
         model.put("posts",posts);
         return "search";
     }
 
-    @PostMapping("filter2")
+    @PostMapping("/lib/filter2")
     public String filter2(@RequestParam int filter2, Map<String, Object> model){
         List<Post> posts = postRepository.findByisbn(filter2);
         model.put("posts",posts);
         return "search";
     }
-    @PostMapping("filter3")
+    @PostMapping("/lib/filter3")
     public String filter3(@RequestParam String filter3, Map<String, Object> model){
         List<Post> posts = postRepository.findByauthor(filter3);
         model.put("posts",posts);
