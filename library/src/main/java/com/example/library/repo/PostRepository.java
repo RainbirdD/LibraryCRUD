@@ -10,4 +10,5 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 List<Post> findBybookTitle(String bookTitle);
 List<Post> findByisbn(int isbn);
 List<Post> findByauthor(String author);
+
 }
